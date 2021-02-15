@@ -45,15 +45,20 @@ export default {
 			type: Array,
 
 			default: () => [
-				'#904d9c', 
+				'#904d9c',
 				'#ff9600',
 				'#00c8ff',
 				'#33dd50',
 				'#ff00ff',
-				'#f2e013', 
+				'#f2e013',
 				'#f29913'
 			]
 
+		},
+
+		colorIndex: {
+			type: Number,
+			default: -1
 		},
 
 		toolbar: {
@@ -84,7 +89,13 @@ export default {
 
 	data() {
 		return {
-			options: {
+
+		};
+	},
+
+	computed: {
+		options() {
+			return {
 				chart: {
 					foreColor: '#999',
 					toolbar: {
@@ -111,7 +122,7 @@ export default {
 				dataLabels: {
 					enabled: false
 				},
-				colors: this.colors,
+				colors: this.extractedColors,
 				fill: {
 					gradient: {
 						enabled: true,
@@ -132,8 +143,8 @@ export default {
 					bar: {
 						horizontal: true,
 						dataLabels: {
-							position: 'top',
-						},
+							position: 'top'
+						}
 					}
 				},
 				title: {
@@ -145,10 +156,12 @@ export default {
 						show: false,
 						color: '#0998a6'
 					},
-					labels: this.intXaxis 
+					labels: this.intXaxis
 						? {
-							formatter: function(val) {
-								return val.toFixed(0);
+							formatter: function (val) {
+								return typeof val.toFixed === 'function'
+									? val.toFixed(0)
+									: val;
 							}
 						}
 						: {}
@@ -161,10 +174,12 @@ export default {
 						show: false,
 						color: '#0998a6'
 					},
-					labels: this.intYaxis 
+					labels: this.intYaxis
 						? {
-							formatter: function(val) {
-								return val.toFixed(0);
+							formatter: function (val) {
+								return typeof val.toFixed === 'function'
+									? val.toFixed(0)
+									: val;
 							}
 						}
 						: {}
@@ -182,13 +197,17 @@ export default {
 					height: 30,
 					offsetY: 8
 				}
-			}
-		};
-	},
+			};
+		},
 
-	computed: {
 		series() {
 			return this.data;
+		},
+
+		extractedColors() {
+			return this.colorIndex !== -1
+				? [this.colors[this.colorIndex]]
+				: this.colors;
 		}
 	}
 

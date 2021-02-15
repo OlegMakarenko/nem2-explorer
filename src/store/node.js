@@ -48,8 +48,8 @@ const managers = [
 	),
 	new Pagination({
 		name: 'payouts',
-		fetchFunction: (pageInfo, filter, store) => NodeService.getNodePayouts(pageInfo, store.getters['nodeRewards'].nodeInfo?.nodeId),
-	}),
+		fetchFunction: (pageInfo, filter, store) => NodeService.getNodePayouts(pageInfo, store.getters['nodeRewards'].nodeInfo?.nodeId)
+	})
 ];
 
 const LOCK = Lock.create();
@@ -121,6 +121,7 @@ export default {
 		uninitializeDetail(context) {
 			context.getters.info.setStore(context).uninitialize();
 			context.getters.nodeRewards.setStore(context).uninitialize();
+			context.getters.payouts.setStore(context).uninitialize();
 		}
 	}
 };

@@ -16,12 +16,12 @@
 					{{getNameByKey('nodeCountByRoles')}}
 				</b-row>
 				<b-row>
-					<b-col 
+					<b-col
 						v-for="(item, index) in nodeRoles"
 						:key="'' + index + 'nodestats_roles'"
-						class="ex-item" 
+						class="ex-item"
 						xs="2"
-						sm="3" 
+						sm="3"
 						lg="3"
 					>
 						<div class="ex-item-title">
@@ -36,11 +36,11 @@
 					{{getNameByKey('rewardPrograms')}}
 				</b-row>
 				<b-row>
-					<b-col 
+					<b-col
 						v-for="(item, index) in nodePrograms"
-						:key="'' + index + 'nodestats_programs'" 
+						:key="'' + index + 'nodestats_programs'"
 						xs="2"
-						sm="3" 
+						sm="3"
 						lg="3"
 					>
 						<b-row class="ex-item item-noborder">
@@ -99,9 +99,10 @@ export default {
 
 		nodeRoles() {
 			const data = this.data?.nodeTypes;
-			if(!data)
+
+			if (!data)
 				return [];
-			
+
 			return [
 				{
 					name: this.getNameByKey('allNodes'),
@@ -155,9 +156,10 @@ export default {
 
 		nodePrograms() {
 			const data = this.data?.nodeTypes;
-			if(!data)
+
+			if (!data)
 				return [];
-			
+
 			return Object
 				.keys(data)
 				.filter((key) => !Number(key))
@@ -165,7 +167,7 @@ export default {
 					name: key,
 					count: data[key],
 					icon: IconSupernode
-				}))
+				}));
 		},
 
 		loading() {
@@ -174,7 +176,7 @@ export default {
 
 		error() {
 			return this.manager.error;
-		},
+		}
 	},
 
 	methods: {
@@ -191,19 +193,19 @@ export default {
 
 <style lang="scss" scoped>
 .ex-ns-group {
-	font-weight: bold;
-	font-size: 12px;
-	color: $secondary-color;
-	padding: 10px 0 5px;
+    font-weight: bold;
+    font-size: 12px;
+    color: $secondary-color;
+    padding: 10px 0 5px;
 }
 
-@media (max-width: 760px) { 
-	.ex-item {
-		border-left: 4px solid #904d9c;
-		padding: 1px 10px;
-		margin-bottom: 15px;
-		max-width: 150px;
-	}
+@media (max-width: 760px) {
+    .ex-item {
+        border-left: 4px solid #904d9c;
+        padding: 1px 10px;
+        margin-bottom: 15px;
+        max-width: 150px;
+    }
 }
 
 .ex-item {
@@ -213,46 +215,44 @@ export default {
 }
 
 .item-noborder {
-	border-left: none;
-	padding-left: 0;
+    border-left: none;
+    padding-left: 0;
 }
 
 .ex-text-break {
-	word-break: break-all;
+    word-break: break-all;
 }
 
 .ex-item-title {
-	color: rgb(187, 187, 187);
-	font-size: 12px;
+    color: rgb(187, 187, 187);
+    font-size: 12px;
 }
 
 .ex-item-value {
-	color: rgb(85, 85, 85);
-	text-align: left;
-	font-size: 14px;
-	margin: 4px 0 0;
+    color: rgb(85, 85, 85);
+    text-align: left;
+    font-size: 14px;
+    margin: 4px 0 0;
 }
 
 .node-program-icon {
-	height: 32px;
-	margin: auto 0;
+    height: 32px;
+    margin: auto 0;
 }
 
 .blue {
-	border-color: $blue-color;
+    border-color: $blue-color;
 }
 
 .pink {
-	border-color: $pink-color;
+    border-color: $pink-color;
 }
 
-
 .green {
-	border-color: $green-color;
+    border-color: $green-color;
 }
 
 .orange {
-	border-color: $orange-color;
+    border-color: $orange-color;
 }
-
 </style>

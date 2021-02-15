@@ -65,6 +65,7 @@ export default {
 				'sourceAddress',
 				'targetAddress',
 				'targetMosaicId',
+				'targetMosaicAliasNames_',
 				'targetNamespaceId',
 				'unresolved',
 				'addressResolutionEntries_',
@@ -115,7 +116,8 @@ export default {
 				'mosaicResolutionEntries',
 				'stateHashSubCacheMerkleRoots',
 				'accountAliasNames',
-				'mosaicAliasNames'
+				'mosaicAliasNames',
+				'targetMosaicAliasNames'
 			],
 			valuesToTranslate: [
 				'newRestrictionType',
@@ -194,14 +196,13 @@ export default {
 		},
 
 		isWordBreakable(key) {
-			return 
-				this.isTruncate(key)
-				|| (typeof key === 'string'
+			return this.isTruncate(key) ||
+				(typeof key === 'string'
 					? (
-						key.toLowerCase().includes('key')
-						|| key.toLowerCase().includes('hash')
-						|| key.toLowerCase().includes('id')
-						|| key.toLowerCase().includes('hex')
+						key.toLowerCase().includes('key') ||
+						key.toLowerCase().includes('hash') ||
+						key.toLowerCase().includes('id') ||
+						key.toLowerCase().includes('hex')
 					)
 					: false
 				);
@@ -360,8 +361,8 @@ export default {
         background-color: rgba(52, 40, 104, 0.05);
     }
 
-	.break-all {
-		word-break: break-all;
-	}
+    .break-all {
+        word-break: break-all;
+    }
 }
 </style>

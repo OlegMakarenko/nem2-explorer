@@ -42,10 +42,10 @@ export default {
 		// If the state has been initialized.
 		...getStateFromManagers(managers),
 		initialized: false,
-		loading: false,
-		loadingInfo: false,
-		loadingBlockTimeDifference: false,
-		loadingTransactionPerBlock: false,
+		loading: true,
+		loadingInfo: true,
+		loadingBlockTimeDifference: true,
+		loadingTransactionPerBlock: true,
 		error: false,
 		networkTransactionFees: [],
 		networkRentalFees: [],
@@ -112,6 +112,7 @@ export default {
 		// Uninitialize the statistics model.
 		async uninitialize({ commit, dispatch, getters }) {
 			const callback = async () => {};
+
 			getters.nodeHeightStats?.uninitialize();
 			await LOCK.uninitialize(callback, commit, dispatch, getters);
 		},
@@ -139,14 +140,14 @@ export default {
 					order: Order.Desc
 				};
 
-				const blocks = await BlockService.streamerBlocks(searchCriteria, 240);
+				const blocks = await BlockService.streamerBlocks(searchCriteria, 300);
 
-				let blockTimeDifferenceDataset = StatisticService.getBlockTimeDifferenceData(blocks, 240, 60);
+				let blockTimeDifferenceDataset = StatisticService.getBlockTimeDifferenceData(blocks, 60);
 
 				context.commit('setBlockTimeDifferenceData', blockTimeDifferenceDataset);
 				context.commit('setLoadingBlockTimeDifference', false);
 
-				let transactionPerBlockDataset = StatisticService.getTransactionPerBlockData(blocks, 240, 60);
+				let transactionPerBlockDataset = StatisticService.getTransactionPerBlockData(blocks, 60);
 
 				context.commit('setTransactionPerBlockData', transactionPerBlockDataset);
 				context.commit('setLoadingTransactionPerBlock', false);

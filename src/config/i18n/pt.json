@@ -90,6 +90,8 @@
     "targetId": "Target Id",
     "targetMosaicId": "Target Mosaic Id",
     "targetNamespaceId": "Target Namespace Id",
+    "targetMosaicAliasNames": "Target Mosaic Alias",
+
     "type": "Type",
     "valueSizeDelta": "Value Size Delta",
     "feeMultiplier": "Fee Multiplier",
@@ -199,8 +201,8 @@
     "cosignatoryAddresses": "Cosignatories",
     "multisigAddresses": "Multisig Accounts",
     "effectiveFee": "Fee",
-    "linkedPublicKey": "linked Public Key",
-    "linkedAccountAddress": "linked Account Address",
+    "linkedPublicKey": "Linked Public Key",
+    "linkedAccountAddress": "Linked Account Address",
     "proofGamma": "Proof Gamma",
     "proofScalar": "Proof Scalar",
     "proofVerificationHash": "Proof Varification Hash",
@@ -368,5 +370,15 @@
     "totalVotingBalance": "Total Voting Balance",
     "harvestingEligibleAccountsCount": "Total Harvesting Eligible Accounts",
     "votingEligibleAccountsCount": "Total Voting Eligible Accounts",
-    "previousImportanceBlockHash": "Previous Importance Block Hash"
+    "previousImportanceBlockHash": "Previous Importance Block Hash",
+	"rewardPrograms": "Reward Programs",
+	"rewardProgram": "Reward Program",
+	"lastTestPassed": "Last test passed",
+	"nodeStatsTitle": "Node Statistics",
+	"allNodes": "Total count",
+	"nodeCountByRoles": "Count By Roles",
+	"chainInfo": "Chain Info",
+	"nodeHeightStatsTitle": "Count of nodes by chain height",
+    "nodeFinalizedHeightStatsTitle": "Count of nodes by finalized height",
+	"viewMoreStatistics": "View More Statistics"
 }

@@ -17,7 +17,7 @@
  */
 
 <template>
-	<div 
+	<div
 		class="chain-info-container"
 		:title="title"
 	>
@@ -45,10 +45,6 @@ import FinalizedIcon from '../../styles/img/finalized.png';
 export default {
 	name: 'ChainInfo',
 
-	components: {
-		Boolean
-	},
-
 	props: {
 		value: {
 			type: Object,
@@ -59,17 +55,17 @@ export default {
 	data() {
 		return {
 			FinalizedIcon
-		}
+		};
 	},
 
 	computed: {
 		title() {
-			return this.translate('chainHeight') 
-			+ ': ' + this.value.chainHeight 
-			+ '\n' + this.translate('finalizedHeight') 
-			+ ': ' + this.value.finalizationHeight
-			+ '\n' + this.translate('lastStatusCheck') 
-			+ ': ' + new Date(this.value.lastStatusCheck)
+			return this.translate('chainHeight') +
+			': ' + this.value.chainHeight +
+			'\n' + this.translate('finalizedHeight') +
+			': ' + this.value.finalizationHeight +
+			'\n' + this.translate('lastStatusCheck') +
+			': ' + new Date(this.value.lastStatusCheck);
 		}
 	},
 
@@ -83,33 +79,32 @@ export default {
 
 <style lang="scss" scoped>
 .chain-info-container {
-	word-break: keep-all;
-	content: ' '
+    word-break: keep-all;
+    content: ' ';
 }
 
 .chain-height {
-	display: flex;
+    display: flex;
 }
 
 .finalized-height {
-	font-size: 90%;
-	opacity: 0.7;
-	display: flex;
-	width: 100%;
+    font-size: 90%;
+    opacity: 0.7;
+    display: flex;
+    width: 100%;
 }
 
 .icon {
-	margin-right: 5px;
+    margin-right: 5px;
 
-	.icon-finalized {
-		margin-left: 1.5px;
-		height: 12px;
-		margin-bottom: 2px;
-	}
+    .icon-finalized {
+        margin-left: 1.5px;
+        height: 12px;
+        margin-bottom: 2px;
+    }
 
-	.icon-height {
-		margin-left: -5px;
-	}
+    .icon-height {
+        margin-left: -5px;
+    }
 }
-
 </style>

@@ -89,12 +89,8 @@ class helper {
   	return result;
   }
 
-  static isHexadecimal(str) {
-  	return /^[0-9a-fA-F]+$/.test(str);
-  }
-
   static isMosaicOrNamespaceId = (str) =>
-  	str.length === 16
+  	str.length === 16 && /^[0-9a-fA-F]+$/.test(str);
 
   static isAccountPublicKey = (str) =>
   	str.length === 64 &&
@@ -184,7 +180,7 @@ class helper {
   static hexOrNamespaceToId = async (hexOrNamespace, toId) => {
   	let Id = MosaicId | NamespaceId;
 
-  	const isHexadecimal = this.isHexadecimal(hexOrNamespace);
+  	const isHexadecimal = this.isMosaicOrNamespaceId(hexOrNamespace);
 
   	if (isHexadecimal)
   		Id = toId === 'mosaic' ? new MosaicId(hexOrNamespace) : NamespaceId.createFromEncoded(hexOrNamespace);
@@ -204,10 +200,15 @@ class helper {
   		return Address.createFromPublicKey(address, http.networkType).plain();
 
   	if (!this.isAccountAddress(address)) {
-  		const namespaceId = new NamespaceId(address);
+  		try {
+  			const namespaceId = new NamespaceId(address);
 
-  		address = await NamespaceService.getLinkedAddress(namespaceId);
-  		return address;
+  			address = await NamespaceService.getLinkedAddress(namespaceId);
+  			return address.plain();
+		  }
+  		catch (e) {
+  			console.error(e);
+  		}
   	}
 
   	return address;
@@ -477,6 +478,7 @@ class helper {
 
   				mosaicsFieldObject.push({
   					...resolvedMosaic,
+  					rawAmount: resolvedMosaic.amount,
   					mosaicId: resolvedMosaic.id.toHex(),
   					amount: helper.formatMosaicAmountWithDivisibility(resolvedMosaic.amount, divisibility),
   					mosaicAliasName: MosaicService.extractMosaicNamespace({ mosaicId: resolvedMosaic.id.toHex() }, mosaicNames)
@@ -495,6 +497,7 @@ class helper {
 
 	  return {
   		...mosaic,
+  		rawAmount: mosaic.amount,
   		mosaicId: mosaic.id.toHex(),
   		amount: this.formatMosaicAmountWithDivisibility(mosaic.amount, http.networkCurrency.divisibility),
   		mosaicAliasName: http.networkCurrency.namespaceName
@@ -520,11 +523,11 @@ class helper {
    * @param mosaicId
    * @return mosaic alias name
    */
-  static getSingleMosaicAliasName = async (mosaicId) => {
+  static getMosaicAliasNames = async (mosaicId) => {
   	const getMosaicNames = await NamespaceService.getMosaicsNames([mosaicId]);
-  	const mosaicAliasName = MosaicService.extractMosaicNamespace({ mosaicId: mosaicId.id.toHex() }, getMosaicNames);
+  	const mosaicAliasNames = MosaicService.extractMosaicNamespace({ mosaicId: mosaicId.toHex() }, getMosaicNames);
 
-  	return mosaicAliasName;
+  	return mosaicAliasNames;
   }
 
   static fallbackCopyTextToClipboard = (text) => {
