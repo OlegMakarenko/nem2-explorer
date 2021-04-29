@@ -56,6 +56,7 @@ import AccountBalanceWidget from '@/components/widgets/AccountBalanceWidget.vue'
 import NodeRewardsClient from '@/components/widgets/NodeRewardsWidget';
 import NodesMapWidget from '@/components/widgets/NodesMapWidget.vue';
 import NodeStatsWidget from '@/components/widgets/NodeStatsWidget.vue';
+import FundsExplorerWidget from '@/components/widgets/FundsExplorerWidget/FundsExplorerWidget.vue';
 
 export default {
 	components: {
@@ -68,7 +69,8 @@ export default {
 		AccountBalanceWidget,
 		NodesMapWidget,
 		NodeRewardsClient,
-		NodeStatsWidget
+		NodeStatsWidget,
+		FundsExplorerWidget
 	},
 
 	props: {

@@ -259,6 +259,12 @@
   					"recipient",
   					"mosaics"
 				]
+			},
+			{
+				"layoutOptions": "full-width",
+				"type": "FundsExplorerWidget",
+				"title": "receiptTitle",
+				"managerGetter": "account/address"
 			}
 		]
 	}
